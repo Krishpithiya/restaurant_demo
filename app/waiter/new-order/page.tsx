@@ -213,14 +213,14 @@ export default function NewOrderPage() {
           <>
             <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} onClick={() => setMobileCartOpen(false)} className="xl:hidden fixed inset-0 bg-black/50 z-50" />
             <motion.div initial={{ y:'100%' }} animate={{ y:0 }} exit={{ y:'100%' }} transition={{ type:'spring', damping:28, stiffness:300 }}
-              className="xl:hidden fixed bottom-0 left-0 right-0 z-50 h-[85vh] bg-brand-cream rounded-t-3xl overflow-hidden shadow-2xl">
-              <div className="flex items-center justify-between p-4 border-b border-brand-cream-dark">
+              className="xl:hidden fixed bottom-0 left-0 right-0 z-50 h-[85vh] bg-brand-cream rounded-t-3xl overflow-hidden shadow-2xl flex flex-col">
+              <div className="flex items-center justify-between p-4 border-b border-brand-cream-dark flex-shrink-0">
                 <h3 className="font-semibold text-brand-brown">Your Order</h3>
                 <button onClick={() => setMobileCartOpen(false)} className="w-8 h-8 rounded-full bg-brand-cream-dark flex items-center justify-center">
                   <X className="w-4 h-4 text-brand-brown-muted" />
                 </button>
               </div>
-              <div className="h-full overflow-y-auto"><CartPanel /></div>
+              <div className="flex-1 min-h-0"><CartPanel /></div>
             </motion.div>
           </>
         )}
