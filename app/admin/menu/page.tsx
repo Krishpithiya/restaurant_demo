@@ -6,12 +6,39 @@ import { Button, Input, EmptyState, SectionHeader } from '@/components/ui';
 import { formatCurrency } from '@/lib/utils';
 import { Plus, Edit2, Trash2, Search, Flame, X } from 'lucide-react';
 
+// const CATEGORIES = ['Biryani', 'Dosa', 'Curries', 'Snacks', 'Desserts', 'Beverages'];
+// const SPICE_LEVELS = ['mild', 'medium', 'hot'] as const;
+
+// const defaultForm = {
+//   name: '', description: '', price: '', image: '', category: 'Biryani',
+//   isVeg: true, isAvailable: true, spiceLevel: 'mild' as const,
+// };
+
 const CATEGORIES = ['Biryani', 'Dosa', 'Curries', 'Snacks', 'Desserts', 'Beverages'];
 const SPICE_LEVELS = ['mild', 'medium', 'hot'] as const;
 
-const defaultForm = {
-  name: '', description: '', price: '', image: '', category: 'Biryani',
-  isVeg: true, isAvailable: true, spiceLevel: 'mild' as const,
+type SpiceLevel = typeof SPICE_LEVELS[number];
+
+type MenuForm = {
+  name: string;
+  description: string;
+  price: string;
+  image: string;
+  category: string;
+  isVeg: boolean;
+  isAvailable: boolean;
+  spiceLevel: SpiceLevel;
+};
+
+const defaultForm: MenuForm = {
+  name: '',
+  description: '',
+  price: '',
+  image: '',
+  category: 'Biryani',
+  isVeg: true,
+  isAvailable: true,
+  spiceLevel: 'mild',
 };
 
 export default function AdminMenuPage() {
@@ -20,7 +47,7 @@ export default function AdminMenuPage() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [showForm, setShowForm] = useState(false);
   const [editItem, setEditItem] = useState<FoodItem | null>(null);
-  const [form, setForm] = useState(defaultForm);
+  const [form, setForm] = useState<MenuForm>(defaultForm);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
   const categories = ['All', ...CATEGORIES];

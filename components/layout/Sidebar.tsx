@@ -37,15 +37,20 @@ export default function Sidebar() {
 
   if (!currentUser) return null;
 
-  const navItems  = navConfig[currentUser.role];
-  const RoleIcon  = roleIcons[currentUser.role];
+  const navItems  = navConfig[currentUser?.role];
+  const RoleIcon  = roleIcons[currentUser?.role];
 
   function handleLogout() { logout(); router.push('/login'); }
 
-  function isActive(href: string) {
-    if (href === `/${currentUser.role}`) return pathname === href;
-    return pathname.startsWith(href);
+ function isActive(href: string) {
+  if (!currentUser) return false;
+
+  if (href === `/${currentUser?.role}`) {
+    return pathname === href;
   }
+
+  return pathname.startsWith(href);
+}
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
@@ -73,12 +78,12 @@ export default function Sidebar() {
 
       <div className="p-4 border-t border-brand-cream-dark">
         <div className="flex items-center gap-3 p-3 rounded-xl bg-brand-cream-dark mb-3">
-          <div className={cn('w-10 h-10 rounded-full bg-gradient-to-br flex items-center justify-center text-white text-sm font-bold shadow-sm', roleColors[currentUser.role])}>
+          <div className={cn('w-10 h-10 rounded-full bg-gradient-to-br flex items-center justify-center text-white text-sm font-bold shadow-sm', roleColors[currentUser?.role])}>
             {currentUser.avatar}
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-brand-brown truncate">{currentUser.name}</p>
-            <p className="text-xs text-brand-brown-muted capitalize">{currentUser.role}</p>
+            <p className="text-xs text-brand-brown-muted capitalize">{currentUser?.role}</p>
           </div>
           <RoleIcon className="w-4 h-4 text-brand-brown-muted flex-shrink-0" />
         </div>
